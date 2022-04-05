@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
 #include<stdio.h>
-// 主要使用循环进行字母逆序排列
+// 主要使用方法递归进行字母逆序排列
 int my_strlen(char* str)
 {
 	int count = 0;
@@ -13,15 +13,14 @@ int my_strlen(char* str)
 }
 void reverse_string(char* str)
 {
-	int left = 0;
-	int right = my_strlen(str) - 1;
-	while (left < right) {
-		char temp = *(str + left);
-		*(str + left) = *(str + right);
-		*(str + right) = temp;
-		left++;
-		right--;
+	int len = my_strlen(str) - 1;
+	char temp = *str;
+	*str = *(str + len);
+	*(str + len) = '\0';
+	if (my_strlen(str) > 1) {
+		reverse_string(str + 1);
 	}
+	*(str + len) = temp;
 }
 int main()
 {
