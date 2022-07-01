@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+//模拟实现库函数atoi
+
+
+// 空字符串
+// 空指针
+// 遇到非数字字符
+// 转化的数字超出范围
+int my_atoi(const char* p)
+{
+	if ('\0' == *p) {
+		return 0;
+	}
+
+	if (NULL == p) {
+		return 0;
+	}
+
+	while (isspace(*p)) {
+		p++;
+		if ('\0' == *p) {
+			return 0;
+		}
+	}
+	long long n = 0;
+	int flag = 1;
+	if ('-' == *p) {
+		flag = -1;
+		p++;
+	}
+	else if ('+' == *p) {
+		flag = 1;
+		p++;
+	}
+	while (isdigit(*p)) {
+		n = n * 10 + flag * (*p - '0');
+		p++;
+		if (n > INT_MAX || n < INT_MIN) {
+			return 0;
+		}
+	}
+	return (int)n;
+}
+int main()
+{
+	char arr[100] = "       -12345";
+	int number = my_atoi(arr);
+	printf("转换的数字为:%d", number);
+	return 0;
+}
